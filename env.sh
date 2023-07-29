@@ -1,2 +1,2 @@
 export SERVERHOST="localhost"
-export SERVERPORT=9090
+export SERVERPORT=8080
