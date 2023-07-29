@@ -12,6 +12,7 @@ type HttpServer struct {
 }
 
 func NewHttpServer(cnf config.Config) *HttpServer {
+	fmt.Println("server started at port:",cnf.Port)
 	return &HttpServer{
 		server: http.Server{
 			Addr: fmt.Sprintf("%s:%d", cnf.Host, cnf.Port),
