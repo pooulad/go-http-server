@@ -1,6 +1,8 @@
 package config
 
-import "github.com/caarlos0/env/v6"
+import (
+	"github.com/caarlos0/env/v9"
+)
 
 type Server struct {
 	Host string `env:"SERVERHOST"`
@@ -17,6 +19,5 @@ func LoadConfigOrPanic() Config {
 	if err != nil {
 		panic(err)
 	}
-
 	return *config
 }
