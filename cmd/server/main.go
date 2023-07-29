@@ -2,11 +2,13 @@ package main
 
 import (
 	"net/http"
+	"github.com/pooulad/go-http-server/pkg/config"
 	"github.com/pooulad/go-http-server/pkg/server"
 )
 
 func main(){
-	server := server.NewHttpServer("localhost",9090)
+	cnf := config.LoadConfigOrPanic()
+	server := server.NewHttpServer(cnf)
 	server.HandleFunc("/hello",func(w http.ResponseWriter, r *http.Request) {
 		w.Write([]byte("hello world!"))
 	})
