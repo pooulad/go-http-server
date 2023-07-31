@@ -9,8 +9,17 @@ type Server struct {
 	Port int    `env:"SERVERPORT"`
 }
 
+type Postgres struct {
+	Username string `env:"PGUSER"`
+	Password int    `env:"PGPASSWORD"`
+	Port int    `env:"PGPORT"`
+	Database int    `env:"PGDATABASE"`
+	Host int    `env:"PGHOST"`
+}
+
 type Config struct {
 	Server
+	Postgres
 }
 
 func LoadConfigOrPanic() Config {
