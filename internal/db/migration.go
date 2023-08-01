@@ -5,23 +5,28 @@ import (
 	"database/sql"
 	"os"
 	"path/filepath"
+	"sync"
 )
 
-func MigrateOrPanic(ctx context.Context,db *sql.DB) error {
-	fpath,fpathErr := filepath.Abs(filepath.Join("assets","track_table.sql"))
-	if fpathErr != nil {
-		return fpathErr
-	}
+var migrateOnce sync.Once = sync.Once{}
 
-	fbyte,fbyteErr := os.ReadFile(fpath)
-	if fbyteErr != nil {
-		return fbyteErr
-	}
+func MigrateOrPanic(ctx context.Context,db *sql.DB) (err error) {
+	migrateOnce.Do(func() {
+		fpath,fpathErr := filepath.Abs(filepath.Join("assets","track_table.sql"))
+		if fpathErr != nil {
+			return
+		}
 	
-	_,exeErr := db.ExecContext(ctx,string(fbyte))
-	if exeErr != nil {
-		return exeErr
-	}
+		fbyte,fbyteErr := os.ReadFile(fpath)
+		if fbyteErr != nil {
+			return
+		}
+		
+		_,exeErr := db.ExecContext(ctx,string(fbyte))
+		if exeErr != nil {
+			return
+		}
+	})
 
-	return nil
+	return
 }
