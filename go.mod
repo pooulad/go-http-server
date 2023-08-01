@@ -6,3 +6,5 @@ require (
 	github.com/caarlos0/env/v9 v9.0.0
 	github.com/lib/pq v1.10.9
 )
+
+require github.com/blockloop/scan v1.3.0 // indirect
