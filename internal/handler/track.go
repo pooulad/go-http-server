@@ -47,7 +47,7 @@ func (h TrackHandler) post(w http.ResponseWriter, r *http.Request) {
 	}
 
 	if err := h.repo.Upsert(r.Context(), &track); err != nil {
-		http.Error(w, "Something went wrong", http.StatusInternalServerError)
+		http.Error(w, "Something went wrong(Upsert method)", http.StatusInternalServerError)
 		return
 	}
 
@@ -70,12 +70,12 @@ func (h TrackHandler) getTrackById(w http.ResponseWriter, r *http.Request) {
 	var err error
 
 	if track, err = h.repo.GetById(r.Context(), trackId); err != nil {
-		http.Error(w, "Something went wrong", http.StatusInternalServerError)
+		http.Error(w, "Something went wrong(GetById method)", http.StatusInternalServerError)
 		return
 	}
 
 	if err := json.NewEncoder(w).Encode(track); err != nil {
-		http.Error(w, "Something went wrong", http.StatusInternalServerError)
+		http.Error(w, "Something went wrong(json.NewEncoder GetById method)", http.StatusInternalServerError)
 		return
 	}
 }
@@ -86,12 +86,12 @@ func (h TrackHandler) getTracks(w http.ResponseWriter, r *http.Request) {
 	var tracks []api.Track
 
 	if tracks, err = h.repo.Get(r.Context()); err != nil {
-		http.Error(w, "Something went wrong", http.StatusInternalServerError)
+		http.Error(w, "Something went wrong(Get method)", http.StatusInternalServerError)
 		return
 	}
 
 	if err := json.NewEncoder(w).Encode(tracks); err != nil {
-		http.Error(w, "Something went wrong", http.StatusInternalServerError)
+		http.Error(w, "Something went wrong(json.NewEncoder Get method)", http.StatusInternalServerError)
 		return
 	}
 }
