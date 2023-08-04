@@ -56,7 +56,6 @@ func (r Repo) Upsert(ctx context.Context, track *api.Track) (err error) {
 }
 
 func (r Repo) Get(ctx context.Context) (ts []api.Track, err error) {
-
 	rows, err := r.QueryContext(ctx, SELECT_ALL)
 	if err != nil {
 		return
@@ -69,7 +68,6 @@ func (r Repo) Get(ctx context.Context) (ts []api.Track, err error) {
 }
 
 func (r Repo) GetById(ctx context.Context, id string) (t api.Track, err error) {
-	fmt.Sprintf(SELECT_BY_ID, id)
 	row, err := r.QueryContext(ctx, fmt.Sprintf(SELECT_BY_ID, id))
 	if err != nil {
 		return
