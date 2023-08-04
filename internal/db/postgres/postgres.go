@@ -11,7 +11,7 @@ import (
 	"github.com/pooulad/go-http-server/pkg/config"
 )
 
-const connString = "postgres://{{.Username}}:{{.Password}}@{{.Host}}:{{.Port}}/{{.Database}}@sslmode=disable"
+const connString = "postgres://{{.Username}}:{{.Password}}@{{.Host}}:{{.Port}}/{{.Database}}?sslmode=disable"
 
 func buildCnnectionStringOrPanic(cnf config.Postgres) string {
 	sb := strings.Builder{}
@@ -35,7 +35,7 @@ func NewPostgres(cnf config.Postgres) (*sql.DB, error) {
 	errDB := db.Ping()
 	if errDB != nil {
 		fmt.Print("Faild to ping the database")
-		return db, fmt.Errorf("could not ping database %w", err)
+		return db, fmt.Errorf("could not ping database %w", errDB)
 	}
 
 	db.SetConnMaxLifetime(time.Second)
