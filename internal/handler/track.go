@@ -3,7 +3,9 @@ package handler
 import (
 	"context"
 	"encoding/json"
+	"fmt"
 	"net/http"
+
 	"github.com/pooulad/go-http-server/api"
 )
 
@@ -68,7 +70,7 @@ func (h TrackHandler) getTrackById(w http.ResponseWriter, r *http.Request) {
 	trackId := r.URL.Query().Get("track_id")
 	var track api.Track
 	var err error
-
+	fmt.Println(trackId)
 	if track, err = h.repo.GetById(r.Context(), trackId); err != nil {
 		http.Error(w, "Something went wrong(GetById method)", http.StatusInternalServerError)
 		return

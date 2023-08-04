@@ -17,7 +17,7 @@ const (
 			RETURNING *;
 	`
 	SELECT_ALL   = "SELECT * FROM tracks"
-	SELECT_BY_ID = "SELECT * FROM tracks WHERE ID = %s"
+	SELECT_BY_ID = "SELECT * FROM tracks WHERE track_id = %s"
 )
 
 type Repo struct {
@@ -69,7 +69,7 @@ func (r Repo) Get(ctx context.Context) (ts []api.Track, err error) {
 }
 
 func (r Repo) GetById(ctx context.Context, id string) (t api.Track, err error) {
-
+	fmt.Sprintf(SELECT_BY_ID, id)
 	row, err := r.QueryContext(ctx, fmt.Sprintf(SELECT_BY_ID, id))
 	if err != nil {
 		return
