@@ -3,7 +3,6 @@ package db
 import (
 	"context"
 	"database/sql"
-	"fmt"
 	"os"
 	"path/filepath"
 	"sync"
@@ -15,7 +14,6 @@ func MigrateOrPanic(ctx context.Context,db *sql.DB) (err error) {
 	migrateOnce.Do(func() {
 		fpath,fpathErr := filepath.Abs(filepath.Join("assets","track_table.sql"))
 		if fpathErr != nil {
-			fmt.Println(fpath)
 			return
 		}
 	
