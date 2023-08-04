@@ -11,10 +11,10 @@ type Server struct {
 
 type Postgres struct {
 	Username string `env:"PGUSER"`
-	Password int    `env:"PGPASSWORD"`
+	Password string    `env:"PGPASSWORD"`
 	Port int    `env:"PGPORT"`
-	Database int    `env:"PGDATABASE"`
-	Host int    `env:"PGHOST"`
+	Database string    `env:"PGDATABASE"`
+	Host string    `env:"PGHOST"`
 }
 
 type Config struct {
